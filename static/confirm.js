@@ -20,7 +20,7 @@ var div = d3.select("body")
   .attr("class", "decisionMenu")
   .style("opacity", 1);
 div.append('button')
-  .attr("id", "buttonStart")
+  .attr("id","buttonStart")
   .attr("type", "button")
   .text("START")
   .on("click", show_confirm);

@@ -108,7 +108,7 @@ function create_grid(amount,set_id) {
         }
         $.ajax({
           url: "/"+"?correct_click="+correct_click+"&color="+Color.random_color1.toString().substring(1)+
-            "&history="+history_best,
+          "&score="+history_best,
           type: "get",
           dataType: "text",
           success: function (response) {

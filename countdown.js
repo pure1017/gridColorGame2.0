@@ -20,7 +20,6 @@ function countdown() {
   var countdown = d3.select("#countdown");
   var t = d3.timer(function (elapsed) {
     var remove = d3.select("#buttonStart").remove();
-    // removeElement = remove[0][0];
     var text = (60 - parseInt(elapsed / 1000)).toString();
     countdown.text("TIME LEFT: " + text);
   });
@@ -43,9 +42,9 @@ function countdown() {
     console.log("correct click when time is up:"+correct_click);
     console.log("history best:"+history_best);
     alert("Time is up!\nCongradulations!\nYour score is "+ correct_click.toString()
-    + ".\nYour highest record is " + history_best.toString()
-    + ".\nHighest record among players is " + History.history_best.toString()
-    + ".\nClick START to try again!");
+      + ".\nYour highest record is " + history_best.toString()
+      + ".\nHighest record among players is " + History.history_best.toString()
+      + ".\nClick START to try again!");
     correct_click = 0;
     console.log("get start2");
     $.ajax({
