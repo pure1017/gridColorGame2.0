@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cloud Computing Final Project</title>
+  <style>
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="grid"></div>
+  <script>
+    document.body.style.backgroundImage = "url('/static/background.jpeg')";
+    var Color = {
+        random_color1:'{{random_color1}}',
+        random_color2:'{{random_color2}}',
+        random_color3:'{{random_color3}}',
+        random_color4:'{{random_color4}}'
+    };
+    var History = {
+        history_best:'{{history_best}}'
+    }
+  </script>
+  <script src="/static/grid.js" type="text/javascript"></script>
+  <script src="/static/confirm.js" type="text/javascript"></script>
+  <div id="countdown"></div>
+  <script src="/static/countdown.js" type="text/javascript"></script>
+</body>
+</html>
