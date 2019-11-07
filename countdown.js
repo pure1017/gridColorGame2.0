@@ -62,7 +62,7 @@ function countdown() {
           error: Error
         });
     console.log("get stop2");
-    window.location.reload(true);
+    window.location.reload();
     d3.select("svg").remove();
     create_grid(amount, set_id);
     d3.select("#countdown").remove();
