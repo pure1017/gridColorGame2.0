@@ -164,6 +164,8 @@ def index():
       cur.execute("create "+"table if not exists records (record integer);")
       cur.execute("insert into " + "records (record) values (" + str(local_best) + ");")
       history_best = cur.execute("select record "+"from records order by record desc limit 1;").fetchall()
+      history_best = int(history_best[0])
+      
       if correct_click <= 4:
         # Execute the query and fetch all results
         res = cur.execute(
