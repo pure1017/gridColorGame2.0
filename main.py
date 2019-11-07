@@ -6,7 +6,7 @@ import logging
 import sqlalchemy
 import pymysql
 import jinja2
-import sqlite3
+#import sqlite3
 
 app = Flask(__name__, template_folder='template')
 
@@ -42,10 +42,10 @@ db = sqlalchemy.create_engine(
 pick_range = ['1', '20', '21', '40', '41', '70', '71', '100', '101', '130']
 
 # create a database to store records
-connRecorddb = sqlite3.connect('record_db.sqlite', check_same_thread=False)
-curRecord = connRecorddb.cursor()
-curRecord.execute("create table"+" if not exists records (record integer);")
-connRecorddb.commit()
+# connRecorddb = sqlite3.connect('record_db.sqlite', check_same_thread=False)
+# curRecord = connRecorddb.cursor()
+# curRecord.execute("create table"+" if not exists records (record integer);")
+# connRecorddb.commit()
 
 def handle_args(args):
   """
@@ -153,14 +153,17 @@ def index():
       correct_click = 0
 
     # insert record into records db
-    curRecord.execute("insert into " + "records (record) values (" + str(local_best) + ");")
-    connRecorddb.commit()
-    curRecord.execute("select record "+"from records order by record desc limit 1;")
-    history_best = int(curRecord.fetchone()[0])
+    # curRecord.execute("insert into " + "records (record) values (" + str(local_best) + ");")
+    # connRecorddb.commit()
+    # curRecord.execute("select record "+"from records order by record desc limit 1;")
+    # history_best = int(curRecord.fetchone()[0])
 
     if db:
       #cur = db.cursor()
       cur = db.connect()
+      cur.execute("create "+"table if not exists records (record integer);")
+      cur.execute("insert into " + "records (record) values (" + str(local_best) + ");")
+      history_best = cur.execute("select record "+"from records order by record desc limit 1;").fetchall()
       if correct_click <= 4:
         # Execute the query and fetch all results
         res = cur.execute(
