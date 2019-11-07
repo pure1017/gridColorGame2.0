@@ -6,6 +6,7 @@ import logging
 import sqlalchemy
 import pymysql
 import jinja2
+import _sqlite3
 
 import model_cloudsql as cloudsql
 
