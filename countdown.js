@@ -66,5 +66,5 @@ function countdown() {
     d3.select("svg").remove();
     create_grid(amount, set_id);
     d3.select("#countdown").remove();
-  }, 3000);
+  }, 60000);
 }

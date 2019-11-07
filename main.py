@@ -19,26 +19,26 @@ _host = "127.0.0.1"
 _port = 5002
 _api_base = "/api"
 
-# db = sqlalchemy.create_engine(
-#     # Equivalent URL:
-#     # mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=/cloudsql/<cloud_sql_instance_name>
-#     sqlalchemy.engine.url.URL(
-#         drivername='mysql+pymysql',
-#         username="root",
-#         password="dbuserdbuser",
-#         database="colorpairs",
-#         query={
-#             'unix_socket': '/cloudsql/{}'.format("gridgame-257423:us-east1:gridgame")
-#         }
-#     )
-# )
+db = sqlalchemy.create_engine(
+    # Equivalent URL:
+    # mysql+pymysql://<db_user>:<db_pass>@/<db_name>?unix_socket=/cloudsql/<cloud_sql_instance_name>
+    sqlalchemy.engine.url.URL(
+        drivername='mysql+pymysql',
+        username="root",
+        password="dbuserdbuser",
+        database="colorpairs",
+        query={
+            'unix_socket': '/cloudsql/{}'.format("gridgame-257423:us-east1:gridgame")
+        }
+    )
+)
 
-db = pymysql.connect(host='localhost',
-                     user='dbuser',
-                     password='dbuserdbuser',
-                     db='gridgame',
-                     charset='utf8mb4',
-                     cursorclass=pymysql.cursors.DictCursor)
+# db = pymysql.connect(host='localhost',
+#                      user='dbuser',
+#                      password='dbuserdbuser',
+#                      db='gridgame',
+#                      charset='utf8mb4',
+#                      cursorclass=pymysql.cursors.DictCursor)
 
 pick_range = ['1', '20', '21', '40', '41', '70', '71', '100', '101', '130']
 
@@ -168,8 +168,8 @@ def index():
         history_best = cloudsql.getrecord()
 
         if db:
-            cur = db.cursor()
-            # cur = db.connect()
+            # cur = db.cursor()
+            cur = db.connect()
             if correct_click <= 4:
                 # Execute the query and fetch all results
                 res = cur.execute(
@@ -177,38 +177,38 @@ def index():
                   "(select * from color where color.index> " + pick_range[0] +
                   " and color.index<" + pick_range[1] + ") as a" +
                   " ORDER BY RAND() LIMIT 2;"
-                )
+                ).fetchall()
             elif 4 < correct_click <= 11:
                 res = cur.execute(
                   "SELECT" + " * FROM " +
                   "(select * from color where color.index> " + pick_range[2] +
                   " and color.index<" + pick_range[3] + ") as a" +
                   " ORDER BY RAND() LIMIT 2;"
-                )
+                ).fetchall()
             elif 11 < correct_click <= 17:
                 res = cur.execute(
                   "SELECT" + " * FROM " +
                   "(select * from color where color.index> " + pick_range[4] +
                   " and color.index<" + pick_range[5] + ") as a" +
                   " ORDER BY RAND() LIMIT 2;"
-                )
+                ).fetchall()
             elif 17 < correct_click <= 25:
                 res = cur.execute(
                   "SELECT" + " * FROM " +
                   "(select * from color where color.index> " + pick_range[6] +
                   " and color.index<" + pick_range[7] + ") as a" +
                   " ORDER BY RAND() LIMIT 2;"
-                )
+                ).fetchall()
             else:
                 res = cur.execute(
                   "SELECT" + " * FROM " +
                   "(select * from color where color.index> " + pick_range[8] +
                   " and color.index<" + pick_range[9] + ") as a" +
                   " ORDER BY RAND() LIMIT 2;"
-                )
+                ).fetchall()
 
-            #random_color = res
-            random_color = cur.fetchall()
+            random_color = res
+            #random_color = cur.fetchall()
             random_color1 = random_color[0]['deep']
             random_color2 = random_color[0]['light']
             random_color3 = random_color[1]['deep']
